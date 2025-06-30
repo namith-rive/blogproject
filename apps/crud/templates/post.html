@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="{{ url_for('crud.static', filename='/style.css') }}" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="pad">
+        <h2> 投稿</h2>
+        <p> タイトルに本文を入力して、[投稿する]をクリックして下さい</p>
+        <br>
+        <!-- フォームに配置 バリデーションはflask_wtfで行うので、 novalidateを設定して、HTMLんぼバリデーションを無効にする-->
+        <form action="{{url_for('crud.login')}}" method="POST" novalidate="novalidate">
+            {{form.csrf_token}}
+            <p>
+                <!-- post_titleに設定されているラベルを表示 -->
+                {{form.post_title.label}}
+                <!-- post_titleの入力欄を配置 -->
+                {{form.post_title(placeholder="タイトルを入力" )}}
+                <!--バリデーションにおけるエラーメッセージを抽出し、出力する -->
+                {% for error in form.post_title.errors %}
+                <span style="color:red">{{error}}</span>
+                {% endfor %}
+            </p>
+            <p>
+                <!-- post_contentsに設定されているラベルを表示 -->
+                {{form.post_contents.label}}
+                <!-- post_contentsの入力欄を配置 -->
+                {{form.post_contents(placeholder="本文を入力" )}}
+                <!--バリデーションにおけるエラーメッセージを抽出し、出力する -->
+                {% for error in form.post_contents.errors %}
+                <span style="color:red">{{error}}</span>
+                {% endfor %}
+            </p>
+            <p>
+                <!-- 送信ボタンを配置 -->
+                {{form.submit()}}
+            </p>
+        </form>
+        <a href="{{url_for('crud.login')}}">投稿をやめる</a>
+    </div>
+</body>
+
+</html>
