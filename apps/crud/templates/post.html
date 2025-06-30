@@ -14,8 +14,10 @@
         <h2> 投稿</h2>
         <p> タイトルに本文を入力して、[投稿する]をクリックして下さい</p>
         <br>
-        <!-- フォームに配置 バリデーションはflask_wtfで行うので、 novalidateを設定して、HTMLんぼバリデーションを無効にする-->
-        <form action="{{url_for('crud.login')}}" method="POST" novalidate="novalidate">
+        <!-- フォームを配置
+            バリデーションはflask_wtfで行うので
+            novalidateを設定してHTMLのバリデーションを無効にする-->
+        <form action="{{url_for('crud.article')}}" method="POST" novalidate="novalidate">
             {{form.csrf_token}}
             <p>
                 <!-- post_titleに設定されているラベルを表示 -->
