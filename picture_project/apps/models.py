@@ -2,7 +2,7 @@ from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from flask_login import UserMixin
-from apps.app import db
+from apps.app import db, login_manager
 
 
 class User(db.Model, UserMixin):
@@ -45,3 +45,24 @@ class User(db.Model, UserMixin):
         # DBからemailカラムの内容がサインインのアドレスと一致するレコードを取得
         # 取得されたらTrue, 取得されない場合はFalseを返す
         return User.query.filter_by(email=self.email).first() is not None
+
+    def verify_password(self, password):
+        """パスワードの照合
+        indexビューでログインチェックする際に呼ばれる
+        Args:
+            password (str): パスワード
+        Returns:
+            bool: パスワードが正しいかどうか.一致したらTrueを返す
+        """
+        return check_password_hash(self.password_hash, password)
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    """
+    Args:
+        user_id(str):ユーザーid
+    Returns:
+        object:対象のユーザのレコード
+    """
+    return db.session.get(User, user_id)

@@ -20,6 +20,19 @@ from flask_migrate import Migrate
 
 Migrate(app, db)
 
+"""LoginManagerの登録
+"""
+from flask_login import LoginManager
+
+# LoginManagerのインスタンス生成
+login_manager = LoginManager()
+# 未ログイン時にリダイレクトするエンドポイントを設定
+login_manager.login_view = "index"
+# ログインしたときのメッセージを設定
+login_manager.login_message = ""
+# LoginManagerをアプリに登録する
+login_manager.init_app(app)
+
 
 """ トップページのルーティング
 """
@@ -50,3 +63,12 @@ def index():
         return redirect(url_for("index"))
 
     return render_template("index.html", form=form)
+
+
+"""Blueprint authappの登録
+"""
+# authappのモジュールvies.pyからBlueprint authappをインポート
+from apps.authapp.views import authapp
+
+# Flaskオブジェクトにblueprint authappを登録
+app.register_blueprint(authapp, url_prefix="/auth")
