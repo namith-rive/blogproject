@@ -1,2 +1,4 @@
 __pycache__/
 *.sqlite
+picture_project/apps/images/
+picture_project/migrations/

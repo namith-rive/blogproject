@@ -42,7 +42,7 @@ def index():
             # ユーザー情報をセッションに格納
             login_user(user)
             # pictappのトップページにリダイレクト
-            return redirect(url_for("index"))
+            return redirect(url_for('pictapp.index'))
         # ログインチェックがFaseの場合はメッセージを表示
         flash("認証に失敗しました")
     # ログイン画面へのアクセスはlogin.htmlをレンダリングして

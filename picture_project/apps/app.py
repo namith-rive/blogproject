@@ -72,3 +72,13 @@ from apps.authapp.views import authapp
 
 # Flaskオブジェクトにblueprint authappを登録
 app.register_blueprint(authapp, url_prefix="/auth")
+
+
+"""ブループリントpictappの登録
+"""
+# pictappのモジュールviews.pyからBlueprint「pictapp」をインポート
+from apps.pictapp.views import pictapp
+
+# FlaskオブジェクトにBlueprint「pictapp」を登録
+# URLのプレフィクスを/pictureにする
+app.register_blueprint(pictapp, url_prefix='/picture')

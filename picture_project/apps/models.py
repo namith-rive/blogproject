@@ -2,8 +2,9 @@ from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from flask_login import UserMixin
-from apps.app import db, login_manager
 
+# app.pyのdbオブジェクト、login_managerオブジェクト
+from apps.app import db, login_manager
 
 class User(db.Model, UserMixin):
     """モデルクラス
